@@ -10,8 +10,8 @@ function ListHouses() {
   const [totalPages, setTotalPages] = useState();
   const [totalElements, setTotalElements] = useState();
   const [isUpdating, setIsUpdating] = useState(false);
-  const [showButtonPrev, setShowButtonPrev] = useState(true);
-  const [showButtonNext, setShowButtonNext] = useState(true);
+  const [showButtonPrev, setShowButtonPrev] = useState(false);
+  const [showButtonNext, setShowButtonNext] = useState(false);
 
   useEffect(() => {
     const fetchHouses = () => {
@@ -29,8 +29,8 @@ function ListHouses() {
           setTotalPages(data.totalPages);
           setTotalElements(data.totalItems);
           setIsUpdating(false);
-          // setShowButtonPrev(data.currentPage + 1 > 1);
-          // setShowButtonNext(data.currentPage + 1 !== data.totalPages);
+          setShowButtonPrev(data.currentPage + 1 > 1);
+          setShowButtonNext(data.currentPage + 1 !== data.totalPages);
         })
         .catch((err) => console.log(err));
     };
@@ -38,8 +38,10 @@ function ListHouses() {
   }, [isUpdating]);
 
   const prevPage = () => {
-    if (currentPage - 1 < 1) {
+    if (currentPage - 1 <= 1) {
       setShowButtonPrev(false);
+      setCurrentPage(currentPage - 1);
+      setIsUpdating(true);
     } else {
       setShowButtonNext(true);
       setCurrentPage(currentPage - 1);
@@ -48,8 +50,10 @@ function ListHouses() {
   };
 
   const nextPage = () => {
-    if (currentPage + 1 > totalPages) {
+    if (currentPage + 1 >= totalPages) {
       setShowButtonNext(false);
+      setCurrentPage(currentPage + 1);
+      setIsUpdating(true);
     } else {
       setShowButtonPrev(true);
       setCurrentPage(currentPage + 1);
