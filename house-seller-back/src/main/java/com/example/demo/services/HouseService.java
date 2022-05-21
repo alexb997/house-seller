@@ -17,7 +17,7 @@ public class HouseService {
         return houseRepository.findAll(pageable);
     }
 
-    public House addHouse(House house){
-        return house;
+    public House addHouse(House house) throws IllegalArgumentException{
+        return houseRepository.save(house);
     }
 }
