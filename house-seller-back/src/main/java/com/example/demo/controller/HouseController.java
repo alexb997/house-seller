@@ -21,6 +21,12 @@ public class HouseController {
 
     public HouseController(HouseService houseService){this.houseService = houseService;}
 
+
+    @PostMapping("/add")
+    public ResponseEntity<House> addHouse(@RequestBody House house) {
+            return new ResponseEntity<>(house,HttpStatus.CREATED);
+    }
+
     @GetMapping("/all")
     public ResponseEntity<Response> allHouses(@RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "5") int size){
@@ -35,6 +41,6 @@ public class HouseController {
         } catch (Exception e) {
             return new ResponseEntity("No houses found",HttpStatus.NOT_FOUND);
         }
-
     }
+
 }
