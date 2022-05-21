@@ -10,26 +10,31 @@ function ListHouses() {
   const [totalPages, setTotalPages] = useState();
   const [totalElements, setTotalElements] = useState();
   const [isUpdating, setIsUpdating] = useState(false);
-  const [showButtonPrev, setShowButtonPrev] = useState(false);
-  const [showButtonNext, setShowButtonNext] = useState(false);
+  const [showButtonPrev, setShowButtonPrev] = useState(true);
+  const [showButtonNext, setShowButtonNext] = useState(true);
 
-  useEffect(async () => {
-    await fetch(
-      "http://localhost:8080/houses/all?page=" +
-        (currentPage - 1) +
-        "&size=" +
-        housesPerPage
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setIsLoading(false);
-        setHousesList(data.items);
-        setTotalPages(data.totalPages);
-        setTotalElements(data.totalItems);
-        setIsUpdating(false);
-        setShowButtonNext(data.currentPage + 1 != data.totalPages);
-      })
-      .catch((err) => console.log(err));
+  useEffect(() => {
+    const fetchHouses = () => {
+      return fetch(
+        "http://localhost:8080/houses/all" +
+          "?page=" +
+          (currentPage - 1) +
+          "&size=" +
+          housesPerPage
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setIsLoading(false);
+          setHousesList(data.items);
+          setTotalPages(data.totalPages);
+          setTotalElements(data.totalItems);
+          setIsUpdating(false);
+          // setShowButtonPrev(data.currentPage + 1 > 1);
+          // setShowButtonNext(data.currentPage + 1 !== data.totalPages);
+        })
+        .catch((err) => console.log(err));
+    };
+    fetchHouses();
   }, [isUpdating]);
 
   const prevPage = () => {
@@ -44,15 +49,16 @@ function ListHouses() {
 
   const nextPage = () => {
     if (currentPage + 1 > totalPages) {
-      setShowNext(true);
+      setShowButtonNext(false);
     } else {
+      setShowButtonPrev(true);
       setCurrentPage(currentPage + 1);
       setIsUpdating(true);
     }
   };
 
   return (
-    <Container style={{ backgroundColor: "black" }}>
+    <Container>
       {isLoading && <p>Loading...</p>}
       <Row className="justify-content-around">
         Houses - {totalElements} announcements
@@ -61,7 +67,7 @@ function ListHouses() {
       <Row>
         {housesList.length !== 0 ? (
           housesList.map((c, index) => (
-            <Col md={3}>
+            <Col md={4}>
               <ListContainer house={c} key={index} />
             </Col>
           ))
@@ -69,23 +75,23 @@ function ListHouses() {
           <h3>No houses documented</h3>
         )}
       </Row>
-      <Row>
-        <span>
-          {!showButtonLeft ? (
+      <hr />
+      <Row className="justify-content-around">
+        <div style={{ textAlign: "center" }}>
+          {!showButtonPrev ? (
             <span></span>
           ) : (
             <Button onClick={() => prevPage()}>Prev..</Button>
           )}
-          <span>{currentPage}</span>
+          {currentPage}
           {!showButtonNext ? (
             <span></span>
           ) : (
             <Button onClick={() => nextPage()}>Next..</Button>
           )}
-          <br />
-          Out of {totalPages} pages
-        </span>
+        </div>
       </Row>
+      <Row className="justify-content-around">Out of {totalPages} pages</Row>
     </Container>
   );
 }

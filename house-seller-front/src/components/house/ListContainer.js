@@ -1,9 +1,6 @@
 import { Card, Col, Row } from "react-bootstrap";
 
 function ListContainer(props) {
-  function Capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
   return (
     <Card>
       <Card.Img
@@ -12,12 +9,12 @@ function ListContainer(props) {
       />
       <Card.Body>
         <Card.Title>
-          <Row>{Capitalize(props.house.adress)}</Row>
-          <Row>{Capitalize(props.house.owner)}</Row>
+          <Row>Adress: {props.house.address}</Row>
+          <Row>Owner: {props.house.owner}</Row>
         </Card.Title>
         <Card.Text>
           <Col className="info-column">
-            <Row>Status: {Capitalize(props.house.status)}</Row>
+            <Row>Status: {props.house.status}</Row>
             <Row>Number: {props.house.number}</Row>
             <Row>Width x Length x Height: {props.house.dimensions}</Row>
             <Row>Price: {props.house.price}</Row>
