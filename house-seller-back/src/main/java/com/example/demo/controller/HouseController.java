@@ -62,6 +62,10 @@ public class HouseController {
 
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<String> specificID(@PathVariable("id") String id) {
-        return new ResponseEntity<>(houseService.removeSpecificHouse(id)+ id ,HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(houseService.removeSpecificHouse(id) ,HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
     }
 }
