@@ -57,11 +57,11 @@ public class HouseController {
 
     @DeleteMapping("/remove")
     public ResponseEntity<String> all() {
-            return new ResponseEntity<>("Removed all house entries",HttpStatus.OK);
+            return new ResponseEntity<>(houseService.removeAllHouses(),HttpStatus.OK);
     }
 
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<String> specificID(@PathVariable("id") String id) {
-        return new ResponseEntity<>("Removed specific house by id "+ id ,HttpStatus.OK);
+        return new ResponseEntity<>(houseService.removeSpecificHouse(id)+ id ,HttpStatus.OK);
     }
 }

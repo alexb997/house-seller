@@ -31,4 +31,12 @@ public class HouseService {
                     return houseRepository.save(updated);
                 });
     }
+
+    public String removeAllHouses(){
+        return "called RemoveAll service";
+    }
+
+    public String removeSpecificHouse(String id ){
+        return "called RemoveSpecific service";
+    }
 }
