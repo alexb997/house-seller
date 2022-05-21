@@ -3,23 +3,23 @@ package com.example.demo.controller;
 import java.util.List;
 
 class Response {
-    private List items;
+    private List<?> items;
     private Integer totalPages;
     private Long totalItems;
     private Integer currentPage;
 
-    public Response(List items, Integer totalPages, Long totalItems, Integer currentPage) {
+    public Response(List<?> items, Integer totalPages, Long totalItems, Integer currentPage) {
         this.items = items;
         this.totalPages = totalPages;
         this.totalItems = totalItems;
         this.currentPage = currentPage;
     }
 
-    public List getItems() {
+    public List<?> getItems() {
         return items;
     }
 
-    public void setItems(List items) {
+    public void setItems(List<?> items) {
         this.items = items;
     }
 
