@@ -49,4 +49,13 @@ public class HouseService {
             return "Removed entry with id: "+id;
         }
     }
+
+    public House getByID(String id ) throws IllegalArgumentException{
+        House house = houseRepository.findById(id).orElse(null);
+        if (Objects.isNull(house) ){
+            throw new IllegalArgumentException("Entry not existing");
+        }else{
+            return house;
+        }
+    }
 }

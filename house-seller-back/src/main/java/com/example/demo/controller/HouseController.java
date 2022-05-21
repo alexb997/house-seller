@@ -49,6 +49,15 @@ public class HouseController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> byID(@PathVariable("id") String id){
+        try{
+            return new ResponseEntity<>(houseService.getByID(id),HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping("/edit/{id}")
     public ResponseEntity<House> editHouse(@PathVariable("id") String id, @RequestBody House house) {
         Optional<House> updated = houseService.editHouse(id,house);
