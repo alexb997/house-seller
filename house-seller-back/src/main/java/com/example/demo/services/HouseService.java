@@ -16,4 +16,8 @@ public class HouseService {
     public Page<House> findAll(Pageable pageable){
         return houseRepository.findAll(pageable);
     }
+
+    public House addHouse(House house){
+        return house;
+    }
 }

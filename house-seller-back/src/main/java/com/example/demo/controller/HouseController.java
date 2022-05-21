@@ -24,7 +24,7 @@ public class HouseController {
 
     @PostMapping("/add")
     public ResponseEntity<House> addHouse(@RequestBody House house) {
-            return new ResponseEntity<>(house,HttpStatus.CREATED);
+            return new ResponseEntity<>(houseService.addHouse(house),HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
