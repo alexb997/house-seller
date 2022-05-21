@@ -50,7 +50,6 @@ const AddHouse = () => {
       <Row>
         <Col md={8}>
           <form
-            className="form-style"
             onSubmit={(e) => {
               handleSubmit(e);
             }}
@@ -78,7 +77,7 @@ const AddHouse = () => {
             <hr />
             <Row>
               <Col md={6}>
-                <label className="formTag">Owner:</label>
+                <label>Owner:</label>
                 <input
                   type="text"
                   name="owner"
@@ -87,7 +86,7 @@ const AddHouse = () => {
                 />
               </Col>
               <Col md={6}>
-                <label className="formTag">Dimensions:</label>
+                <label>Dimensions:</label>
                 <input
                   type="text"
                   name="dimensions"
@@ -99,7 +98,7 @@ const AddHouse = () => {
             <hr />
             <Row>
               <Col md={6}>
-                <label className="formTag">Number:</label>
+                <label>Number:</label>
                 <input
                   type="number"
                   name="number"
@@ -108,7 +107,7 @@ const AddHouse = () => {
                 />
               </Col>
               <Col md={6}>
-                <label className="formTag">Price:</label>
+                <label>Price:</label>
                 <input
                   type="number"
                   name="price"

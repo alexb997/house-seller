@@ -88,8 +88,8 @@ public class House {
         House updated = new House(
                 house.number,
                 house.status,
-                house.address,
                 house.dimensions,
+                house.address,
                 house.owner,
                 house.price
         );

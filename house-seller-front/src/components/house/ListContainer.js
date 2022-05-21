@@ -1,6 +1,8 @@
-import { Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function ListContainer(props) {
+  const navigate = useNavigate();
   return (
     <Card>
       <Card.Img
@@ -20,6 +22,12 @@ function ListContainer(props) {
             <Row>Price: {props.house.price}</Row>
           </Col>
         </Card.Text>
+        <Button
+          variant="primary"
+          onClick={() => navigate(`/house/edit/` + props.house.id)}
+        >
+          Edit
+        </Button>
       </Card.Body>
     </Card>
   );
