@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -46,6 +47,11 @@ public class HouseController {
         } catch (Exception e) {
             return new ResponseEntity("No houses found",HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<House> editHouse(@PathVariable("id") String id, @RequestBody House house) {
+        return new ResponseEntity<>(house,HttpStatus.OK);
     }
 
 }
