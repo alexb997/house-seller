@@ -20,4 +20,8 @@ public class HouseService {
     public House addHouse(House house) throws IllegalArgumentException{
         return houseRepository.save(house);
     }
+
+    public House editHouse(String id,House house) throws IllegalArgumentException{
+        return house;
+    }
 }
