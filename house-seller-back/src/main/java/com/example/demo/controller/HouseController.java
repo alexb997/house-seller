@@ -34,7 +34,7 @@ public class HouseController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Response> allHouses(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<Response> all(@RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "5") int size){
         try{
             List<House> houses;
@@ -55,4 +55,13 @@ public class HouseController {
         return updated.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @DeleteMapping("/remove")
+    public ResponseEntity<String> all() {
+            return new ResponseEntity<>("Removed all house entries",HttpStatus.OK);
+    }
+
+    @DeleteMapping("/remove/{id}")
+    public ResponseEntity<String> specificID(@PathVariable("id") String id) {
+        return new ResponseEntity<>("Removed specific house by id "+ id ,HttpStatus.OK);
+    }
 }
