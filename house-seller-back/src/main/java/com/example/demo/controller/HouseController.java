@@ -51,7 +51,8 @@ public class HouseController {
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<House> editHouse(@PathVariable("id") String id, @RequestBody House house) {
-        return new ResponseEntity<>(houseService.editHouse(id,house),HttpStatus.OK);
+        Optional<House> updated = houseService.editHouse(id,house);
+        return updated.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }

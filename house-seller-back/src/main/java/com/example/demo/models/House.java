@@ -32,6 +32,10 @@ public class House {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public int getNumber() {
         return number;
     }
@@ -78,6 +82,18 @@ public class House {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public House updateWith(House house) {
+        House updated = new House(
+                house.number,
+                house.status,
+                house.address,
+                house.dimensions,
+                house.owner,
+                house.price
+        );
+        return updated;
     }
 
     @Override
