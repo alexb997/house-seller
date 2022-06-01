@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document(collection = "houses")
 public class House {
+
     @Id
     private String id;
     private int number;
