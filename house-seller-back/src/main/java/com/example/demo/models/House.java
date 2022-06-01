@@ -15,17 +15,19 @@ public class House {
     private String address;
     private String owner;
     private int price;
+    private long views;
 
     public House() {
     }
 
-    public House(int number, String status, String dimensions, String address, String owner, int price) {
+    public House(int number, String status, String dimensions, String address, String owner, int price,long views) {
         this.number = number;
         this.status = status;
         this.dimensions = dimensions;
         this.address = address;
         this.owner = owner;
         this.price = price;
+        this.views = views;
     }
 
     public String getId() {
@@ -84,6 +86,14 @@ public class House {
         this.price = price;
     }
 
+    public long getViews() {
+        return views;
+    }
+
+    public void setViews(long views) {
+        this.views = views;
+    }
+
     public House updateWith(House house) {
         House updated = new House(
                 house.number,
@@ -91,7 +101,8 @@ public class House {
                 house.dimensions,
                 house.address,
                 house.owner,
-                house.price
+                house.price,
+                house.views
         );
         return updated;
     }
@@ -106,6 +117,7 @@ public class House {
                 ", address='" + address + '\'' +
                 ", owner='" + owner + '\'' +
                 ", price=" + price +
+                ", views=" + views +
                 '}';
     }
 }

@@ -35,18 +35,16 @@ public class HouseService {
                 });
     }
 
-    public String removeAllHouses(){
+    public void removeAllHouses(){
         houseRepository.deleteAll();
-        return "Removed all entries";
     }
 
-    public String removeSpecificHouse(String id ) throws IllegalArgumentException{
+    public void removeHouseBy(String id ) throws IllegalArgumentException{
         House house = houseRepository.findById(id).orElse(null);
         if (Objects.isNull(house) ){
             throw new IllegalArgumentException("Entry not existing");
         }else{
             houseRepository.deleteById(id);
-            return "Removed entry with id: "+id;
         }
     }
 
@@ -55,6 +53,8 @@ public class HouseService {
         if (Objects.isNull(house) ){
             throw new IllegalArgumentException("Entry not existing");
         }else{
+            house.setViews(house.getViews()+1);
+            houseRepository.save(house);
             return house;
         }
     }

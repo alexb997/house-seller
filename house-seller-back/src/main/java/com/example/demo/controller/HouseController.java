@@ -66,13 +66,15 @@ public class HouseController {
 
     @DeleteMapping("/remove")
     public ResponseEntity<String> all() {
-            return new ResponseEntity<>(houseService.removeAllHouses(),HttpStatus.OK);
+        houseService.removeAllHouses();
+        return new ResponseEntity<>("removed all house entryes",HttpStatus.OK);
     }
 
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<String> specificID(@PathVariable("id") String id) {
         try{
-            return new ResponseEntity<>(houseService.removeSpecificHouse(id) ,HttpStatus.OK);
+            houseService.removeHouseBy(id);
+            return new ResponseEntity<>("Removed house with id:"+ id,HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
