@@ -51,7 +51,8 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
         try{
-            return new ResponseEntity<>(userService.removeSpecificUser(id) ,HttpStatus.OK);
+            userService.removeById(id);
+            return new ResponseEntity<>("Removed user with id:",HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }

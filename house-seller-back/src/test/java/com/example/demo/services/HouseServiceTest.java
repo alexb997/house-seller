@@ -26,7 +26,7 @@ public class HouseServiceTest {
     @InjectMocks
     private HouseService houseService;
 
-    House mockHouse = new House(121,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200,0);
+    House mockHouse = new House(121,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200);
 
     @Test
     public void findByIdTest(){
@@ -65,8 +65,8 @@ public class HouseServiceTest {
     @Test
     public void allHousesTest() throws Exception{
         List<House> mockHouseList= new ArrayList<>();
-        House mockHouse2 = new House(122,"Fully-mobilated","300x600x900","Somewhere-else","Mr.Nobody",1200,0);
-        House mockHouse3 = new House(123,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200,0);
+        House mockHouse2 = new House(122,"Fully-mobilated","300x600x900","Somewhere-else","Mr.Nobody",1200);
+        House mockHouse3 = new House(123,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200);
 
         mockHouseList.add(mockHouse);
         mockHouseList.add(mockHouse2);

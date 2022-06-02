@@ -28,7 +28,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public String removeSpecificUser(String id ) throws IllegalArgumentException{
+    public String removeById(String id ) throws IllegalArgumentException{
         User user = userRepository.findById(id).orElse(null);
         if (Objects.isNull(user) ){
             throw new IllegalArgumentException("Entry not existing");

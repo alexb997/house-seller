@@ -1,0 +1,43 @@
+package com.example.demo.services;
+
+import com.example.demo.models.View;
+import com.example.demo.repository.ViewRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Objects;
+
+public class ViewService {
+
+    final private ViewRepository viewRepository;
+
+    public ViewService(ViewRepository viewRepository) {
+        this.viewRepository = viewRepository;
+    }
+
+    public Page<View> allViews(Pageable pageable){
+        return viewRepository.findAll(pageable);
+    }
+
+    public Page<View> allByUser(String id ,Pageable pageable){
+        return viewRepository.findAllByUserID(id,pageable);
+    }
+
+    public Page<View> allByHouse(String id ,Pageable pageable){
+        return viewRepository.findAllByHouseID(id,pageable);
+    }
+
+    public View addNewView(View view) throws IllegalArgumentException{
+        return viewRepository.save(view);
+    }
+
+    public String removeById(String id ) throws IllegalArgumentException{
+        View view = viewRepository.findById(id).orElse(null);
+        if (Objects.isNull(view) ){
+            throw new IllegalArgumentException("Entry not existing");
+        }else{
+            viewRepository.deleteById(id);
+            return "Removed entry with id: "+id;
+        }
+    }
+}

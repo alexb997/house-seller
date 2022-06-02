@@ -53,8 +53,6 @@ public class HouseService {
         if (Objects.isNull(house) ){
             throw new IllegalArgumentException("Entry not existing");
         }else{
-            house.setViews(house.getViews()+1);
-            houseRepository.save(house);
             return house;
         }
     }
