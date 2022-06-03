@@ -1,8 +1,15 @@
+import { useEffect, useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function ListContainer(props) {
+  const [views, setViews] = useState(0);
   const navigate = useNavigate();
+  useEffect(() => {
+    fetch("http://localhost:8080/views/house/" + props.house.id)
+      .then((response) => response.json())
+      .then((data) => setViews(data));
+  }, []);
   return (
     <Card>
       <Card.Img
@@ -28,6 +35,7 @@ function ListContainer(props) {
         >
           Edit
         </Button>
+        <Row className="justify-content-end">{views} views</Row>
       </Card.Body>
     </Card>
   );
