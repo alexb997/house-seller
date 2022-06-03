@@ -11,7 +11,7 @@ function ListContainer(props) {
       .then((data) => setViews(data));
   }, []);
   return (
-    <Card>
+    <Card onClick={() => navigate(`/house/` + props.house.id)}>
       <Card.Img
         variant="top"
         src="https://media.istockphoto.com/photos/beautiful-residential-home-exterior-on-bright-sunny-day-with-green-picture-id1211174464?k=20&m=1211174464&s=612x612&w=0&h=fQ3ahmaJnYcZb0UQtBXvOhcuhHFTgK9BA5Mylic7Gnw="
