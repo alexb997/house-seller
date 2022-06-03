@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface ViewRepository extends PagingAndSortingRepository<View,String> {
     Page<View> findAllByUserID(String id, Pageable pageable);
     Page<View> findAllByHouseID(String id, Pageable pageable);
+    Long countByHouseID(String id);
 }

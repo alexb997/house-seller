@@ -29,6 +29,10 @@ public class ViewService {
         return viewRepository.findAllByHouseID(id,pageable);
     }
 
+    public Long houseViews(String id){
+        return viewRepository.countByHouseID(id);
+    }
+
     public View addNewView(View view) throws IllegalArgumentException{
         return viewRepository.save(view);
     }

@@ -71,6 +71,18 @@ public class ViewController {
         }
     }
 
+    @GetMapping("/house/{id}")
+    public ResponseEntity<Long> getViewsCount(@PathVariable("id") String id ,
+                                                  @RequestParam(defaultValue = "0") int page,
+                                                  @RequestParam(defaultValue = "3") int size) {
+        try{
+            Long count = viewService.houseViews(id);
+            return new ResponseEntity<>(count, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("Views not found",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/add")
     public ResponseEntity<View> registerView(@RequestBody View view) {
         try{
