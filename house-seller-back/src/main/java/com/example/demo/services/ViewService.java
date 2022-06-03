@@ -4,9 +4,11 @@ import com.example.demo.models.View;
 import com.example.demo.repository.ViewRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+@Service
 public class ViewService {
 
     final private ViewRepository viewRepository;

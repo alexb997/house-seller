@@ -15,6 +15,14 @@ public class View {
     private String houseID;
     private Date viewDate;
 
+    public View(){};
+
+    public View(String userID, String houseID, Date viewDate) {
+        this.userID = userID;
+        this.houseID = houseID;
+        this.viewDate = viewDate;
+    }
+
     public String getId() {
         return id;
     }

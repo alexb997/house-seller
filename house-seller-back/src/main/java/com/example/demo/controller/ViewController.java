@@ -72,10 +72,9 @@ public class ViewController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<View> registerView(@RequestBody View user) {
-        System.out.println("Calling controller register user");
+    public ResponseEntity<View> registerView(@RequestBody View view) {
         try{
-            View newView= viewService.addNewView(user);
+            View newView= viewService.addNewView(view);
             return new ResponseEntity<>(newView, HttpStatus.CREATED);
         }catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
