@@ -46,4 +46,8 @@ public class ViewService {
             return "Removed entry with id: "+id;
         }
     }
+
+    public void removeAllViews(){
+        viewRepository.deleteAll();
+    }
 }

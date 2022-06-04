@@ -26,7 +26,7 @@ public class HouseServiceTest {
     @InjectMocks
     private HouseService houseService;
 
-    House mockHouse = new House(121,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200);
+    House mockHouse = new House(121,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200,"SomeDescription");
 
     @Test
     public void findByIdTest(){
@@ -42,7 +42,7 @@ public class HouseServiceTest {
         Mockito.when(houseRepository.save(Mockito.any(House.class))).thenReturn(mockHouse);
 
         House result = houseService.addHouse(new House());
-        String expected ="House{id='null', number=121, status='Fully-mobilated', dimensions='300x600x900', address='Somewhere', owner='Ms.Nobody', price=1200}";
+        String expected ="House{id='null', number=121, status='Fully-mobilated', dimensions='300x600x900', address='Somewhere', owner='Ms.Nobody', price=1200, description='SomeDescription'}";
 
         assertThat(result.toString()).isEqualTo(expected);
         System.out.println(result);
@@ -55,7 +55,7 @@ public class HouseServiceTest {
         Mockito.when(houseRepository.save(Mockito.any(House.class))).thenReturn(mockHouse);
         mockHouse.setOwner("Someone");
         Optional<House> result = houseService.editHouse(Mockito.anyString(),new House());
-        String expected ="Optional[House{id='null', number=121, status='Fully-mobilated', dimensions='300x600x900', address='Somewhere', owner='Someone', price=1200}]";
+        String expected ="Optional[House{id='null', number=121, status='Fully-mobilated', dimensions='300x600x900', address='Somewhere', owner='Someone', price=1200, description='SomeDescription'}]";
 
         assertThat(result.toString()).isEqualTo(expected);
         System.out.println(result);
@@ -65,8 +65,8 @@ public class HouseServiceTest {
     @Test
     public void allHousesTest() throws Exception{
         List<House> mockHouseList= new ArrayList<>();
-        House mockHouse2 = new House(122,"Fully-mobilated","300x600x900","Somewhere-else","Mr.Nobody",1200);
-        House mockHouse3 = new House(123,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200);
+        House mockHouse2 = new House(122,"Fully-mobilated","300x600x900","Somewhere-else","Mr.Nobody",1200,"SomeDescription");
+        House mockHouse3 = new House(123,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200,"SomeDescription");
 
         mockHouseList.add(mockHouse);
         mockHouseList.add(mockHouse2);

@@ -102,4 +102,10 @@ public class ViewController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/remove")
+    public ResponseEntity<String> all() {
+        viewService.removeAllViews();
+        return new ResponseEntity<>("Removed all view entryes",HttpStatus.OK);
+    }
 }
