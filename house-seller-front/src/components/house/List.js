@@ -71,8 +71,8 @@ function ListHouses() {
       <Row>
         {housesList.length !== 0 ? (
           housesList.map((c, index) => (
-            <Col md={4}>
-              <ListContainer house={c} key={index} />
+            <Col md={4} key={index}>
+              <ListContainer house={c} />
             </Col>
           ))
         ) : (

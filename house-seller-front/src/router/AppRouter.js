@@ -10,9 +10,9 @@ function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path="/houses" element={<ListHouses />} />
+        <Route path="/" element={<ListHouses />} />
         <Route path="/house/add" element={<AddHouse />} />
-        <Route path="/house/:id" elements={<Details />} />
+        <Route path="/house/:id" element={<Details />} />
         <Route path="/house/edit/:id" element={<EditHouse />} />
         <Route path="/register" element={<Register />} />
       </Routes>
