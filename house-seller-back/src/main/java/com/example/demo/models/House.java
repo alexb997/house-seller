@@ -17,13 +17,13 @@ public class House {
     private String owner;
     private int price;
     private String description;
-    //Characteristics-different object or multiple properties.
+    private Characteristics characteristics;
 
 
     public House() {
     }
 
-    public House(int number, String status, String dimensions, String address, String owner, int price,String description) {
+    public House(int number, String status, String dimensions, String address, String owner, int price,String description,Characteristics characteristics) {
         this.number = number;
         this.status = status;
         this.dimensions = dimensions;
@@ -31,6 +31,7 @@ public class House {
         this.owner = owner;
         this.price = price;
         this.description = description;
+        this.characteristics= characteristics;
     }
 
     public String getId() {
@@ -97,6 +98,14 @@ public class House {
         this.description = description;
     }
 
+    public Characteristics getCharacteristics() {
+        return characteristics;
+    }
+
+    public void setCharacteristics(Characteristics characteristics) {
+        this.characteristics = characteristics;
+    }
+
     public House updateWith(House house) {
         House updated = new House(
                 house.number,
@@ -105,7 +114,8 @@ public class House {
                 house.address,
                 house.owner,
                 house.price,
-                house.description
+                house.description,
+                house.characteristics
         );
         return updated;
     }

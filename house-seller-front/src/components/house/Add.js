@@ -9,6 +9,7 @@ const AddHouse = () => {
   const [owner, setOwner] = useState("");
   const [price, setPrice] = useState(0);
   const [number, setNumber] = useState(0);
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     setHouse({
@@ -18,6 +19,7 @@ const AddHouse = () => {
       owner: owner,
       number: number,
       price: price,
+      description: description,
     });
   }, []);
 
@@ -35,6 +37,7 @@ const AddHouse = () => {
         owner: owner,
         number: number,
         price: price,
+        description: description,
       }),
     };
     fetch("http://localhost:8080/houses/add/", requestOptions)
@@ -113,6 +116,18 @@ const AddHouse = () => {
                   name="price"
                   placeholder={house.price}
                   onChange={(e) => setPrice(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <Col>
+                <label>description:</label>
+                <input
+                  type="text"
+                  name="description"
+                  placeholder={house.description}
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </Col>
             </Row>

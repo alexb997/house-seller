@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.models.Characteristics;
 import com.example.demo.models.House;
 import com.example.demo.services.HouseService;
 import org.json.JSONObject;
@@ -44,14 +45,14 @@ public class HouseControllerTest {
     @MockBean
     private HouseService houseService;
 
-    House mockHouse = new House(121,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200,"SomeDescription");
+    House mockHouse = new House(121,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200,"SomeDescription",new Characteristics());
 
-    String mockHouseJSON ="{\"number\":\"121\",\"status\":\"Fully-mobilated\",\"dimensions\":\"300x600x900\",\"address\":\"Somewhere\",\"owner\":\"Ms.Nobody\",\"price\":\"1200\",\"description\":\"SomeDescription\"}";
+    String mockHouseJSON ="{\"number\":\"121\",\"status\":\"Fully-mobilated\",\"dimensions\":\"300x600x900\",\"address\":\"Somewhere\",\"owner\":\"Ms.Nobody\",\"price\":\"1200\",\"description\":\"SomeDescription\",\"characteristics\":\"{}\"}";
 
     @Test
     public void getAllHousesTest() throws Exception {
-        House mockHouse2 = new House(122,"Fully-mobilated","300x600x900","Somewhere-else","Mr.Nobody",1200,"SomeDescription");
-        House mockHouse3 = new House(123,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200,"SomeDescription");
+        House mockHouse2 = new House(122,"Fully-mobilated","300x600x900","Somewhere-else","Mr.Nobody",1200,"SomeDescription",new Characteristics());
+        House mockHouse3 = new House(123,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200,"SomeDescription",new Characteristics());
         List<House> mockHouses= new ArrayList<>();
         mockHouses.add(mockHouse);
         mockHouses.add(mockHouse2);
@@ -91,8 +92,8 @@ public class HouseControllerTest {
 
     @Test
     public void editHouseTest() throws Exception{
-        House mockHouseUpdated = new House(123,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200,"SomeDescription");
-        String mockHouseUpdatedJSON = "{\"number\":\"123\",\"status\":\"Fully-mobilated\",\"dimensions\":\"300x600x900\",\"address\":\"Somewhere\",\"owner\":\"Ms.Nobody\",\"price\":\"1200\",\"description\":\"SomeDescription\"}";
+        House mockHouseUpdated = new House(123,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200,"SomeDescription",new Characteristics());
+        String mockHouseUpdatedJSON = "{\"number\":\"123\",\"status\":\"Fully-mobilated\",\"dimensions\":\"300x600x900\",\"address\":\"Somewhere\",\"owner\":\"Ms.Nobody\",\"price\":\"1200\",\"description\":\"SomeDescription\",\"characteristics\":\"{}\"}";
 
         Mockito.when(houseService.editHouse(Mockito.anyString(),Mockito.any(House.class))).thenReturn(Optional.of(mockHouseUpdated));
 

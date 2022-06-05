@@ -37,6 +37,22 @@ public class ViewController {
         }
     }
 
+    @GetMapping("/byHouses/topThree")
+    public ResponseEntity<Response> getTopThreeHouses(@RequestParam(defaultValue = "0") int page,
+                                                @RequestParam(defaultValue = "3") int size) {
+        try{
+            List<View> views;
+            Pageable paging = PageRequest.of(page, size);
+            Page<View> pageViews;
+            pageViews = viewService.allViews(paging);
+            views = pageViews.getContent();
+            Response response = new Response(views,pageViews.getTotalPages(),pageViews.getTotalElements(),pageViews.getNumber());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("Views not found",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/byUser/{id}")
     public ResponseEntity<Response> getAllByUser(@PathVariable("id") String id ,
                                                  @RequestParam(defaultValue = "0") int page,
