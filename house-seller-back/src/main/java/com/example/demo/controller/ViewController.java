@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -40,12 +41,10 @@ public class ViewController {
     @GetMapping("/byHouses/topThree")
     public ResponseEntity<List> getTopThreeHouses(@RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "3") int size) {
-        try{
-            List<String> housesID= viewService.topThreeHouses();
-            return new ResponseEntity<>(housesID, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity("Views not found",HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+            List<String> houseIDs = viewService.topThreeHouses();
+            return new ResponseEntity<>(houseIDs, HttpStatus.OK);
+
     }
 
     @GetMapping("/byUser/{id}")
