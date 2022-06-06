@@ -38,16 +38,11 @@ public class ViewController {
     }
 
     @GetMapping("/byHouses/topThree")
-    public ResponseEntity<Response> getTopThreeHouses(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<List> getTopThreeHouses(@RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "3") int size) {
         try{
-            List<View> views;
-            Pageable paging = PageRequest.of(page, size);
-            Page<View> pageViews;
-            pageViews = viewService.allViews(paging);
-            views = pageViews.getContent();
-            Response response = new Response(views,pageViews.getTotalPages(),pageViews.getTotalElements(),pageViews.getNumber());
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            List<String> housesID= viewService.topThreeHouses();
+            return new ResponseEntity<>(housesID, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity("Views not found",HttpStatus.INTERNAL_SERVER_ERROR);
         }

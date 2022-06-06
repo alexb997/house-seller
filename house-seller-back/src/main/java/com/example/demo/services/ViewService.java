@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -49,5 +50,9 @@ public class ViewService {
 
     public void removeAllViews(){
         viewRepository.deleteAll();
+    }
+
+    public List<String> topThreeHouses(){
+        return viewRepository.topThreeHouses();
     }
 }
