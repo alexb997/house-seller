@@ -16,6 +16,7 @@ public class House {
     private String address;
     private String owner;
     private int price;
+    private int reduction;
     private String description;
     private Characteristics characteristics;
 
@@ -23,7 +24,7 @@ public class House {
     public House() {
     }
 
-    public House(int number, String status, String dimensions, String address, String owner, int price,String description,Characteristics characteristics) {
+    public House(int number, String status, String dimensions, String address, String owner, int price, int reduction, String description,Characteristics characteristics) {
         this.number = number;
         this.status = status;
         this.dimensions = dimensions;
@@ -31,6 +32,7 @@ public class House {
         this.owner = owner;
         this.price = price;
         this.description = description;
+        this.reduction = reduction;
         this.characteristics= characteristics;
     }
 
@@ -106,6 +108,14 @@ public class House {
         this.characteristics = characteristics;
     }
 
+    public int getReduction() {
+        return reduction;
+    }
+
+    public void setReduction(int reduction) {
+        this.reduction = reduction;
+    }
+
     public House updateWith(House house) {
         House updated = new House(
                 house.number,
@@ -114,6 +124,7 @@ public class House {
                 house.address,
                 house.owner,
                 house.price,
+                house.reduction,
                 house.description,
                 house.characteristics
         );

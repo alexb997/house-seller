@@ -20,6 +20,10 @@ public class HouseService {
         return houseRepository.findAll(pageable);
     }
 
+    public Page<House> findAllReduced(Pageable pageable){
+        return houseRepository.findAllByReductionOrderByReduction(pageable);
+    }
+
     public House addHouse(House house) throws IllegalArgumentException{
         return houseRepository.save(house);
     }
