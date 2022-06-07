@@ -39,12 +39,16 @@ public class ViewController {
     }
 
     @GetMapping("/byHouses/topThree")
-    public ResponseEntity<List> getTopThreeHouses(@RequestParam(defaultValue = "0") int page,
-                                                @RequestParam(defaultValue = "3") int size) {
-
-            List<String> houseIDs = viewService.topThreeHouses();
-            return new ResponseEntity<>(houseIDs, HttpStatus.OK);
-
+    public ResponseEntity<Response> getTopThreeHouses() {
+        try{
+            List<String> houseIds;
+            Pageable paging = PageRequest.of(0, 3);
+            houseIds = viewService.topThreeHouses(paging);;
+            Response response = new Response(houseIds,0, 3L,3);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("Views not found",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/byUser/{id}")

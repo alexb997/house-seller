@@ -14,6 +14,6 @@ public interface ViewRepository extends PagingAndSortingRepository<View,String>{
     Page<View> findAllByUserID(String id, Pageable pageable);
     Page<View> findAllByHouseID(String id, Pageable pageable);
     Long countByHouseID(String id);
-    @Aggregation(pipeline = { "{ '$group': { '_id' : '$houseID' } }" })
-    List<String> findDistinctHouseIDs();
+    @Aggregation(pipeline = { "{ '$group': { '_id' : '$houseID' } } , { $sort: { { $sum: 1} : -1 } }" })
+    List<String> findByDistinctHouseIDs(Pageable pageable);
 }

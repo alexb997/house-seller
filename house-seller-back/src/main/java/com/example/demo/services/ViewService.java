@@ -53,8 +53,8 @@ public class ViewService {
         viewRepository.deleteAll();
     }
 
-    public List<String> topThreeHouses(){
-        List<String> supplierNames = viewRepository.findDistinctHouseIDs();
+    public List<String> topThreeHouses(Pageable pageable){
+        List<String> supplierNames = viewRepository.findByDistinctHouseIDs(pageable);
         return supplierNames;
     }
 }
