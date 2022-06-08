@@ -21,7 +21,7 @@ public class HouseService {
     }
 
     public Page<House> findAllReduced(Pageable pageable){
-        return houseRepository.findByOrderByReductionDesc(pageable);
+        return houseRepository.findByReductionGreaterThanOrderByReductionDesc(0,pageable);
     }
 
     public House addHouse(House house) throws IllegalArgumentException{

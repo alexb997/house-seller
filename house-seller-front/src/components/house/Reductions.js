@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { Button, Col, Row, Container } from "react-bootstrap";
 import ListContainer from "./ListContainer";
 import MostViewed from "./MostViewed";
-import Reductions from "./Reductions";
 
-function ListHouses() {
+function Reductions() {
   const [isLoading, setIsLoading] = useState(true);
   const [housesList, setHousesList] = useState([]);
   const [housesPerPage, setHousesPerPage] = useState(6);
@@ -18,7 +17,7 @@ function ListHouses() {
   useEffect(() => {
     const fetchHouses = () => {
       return fetch(
-        "http://localhost:8080/houses/all" +
+        "http://localhost:8080/houses/byReductions" +
           "?page=" +
           (currentPage - 1) +
           "&size=" +
@@ -66,18 +65,7 @@ function ListHouses() {
   return (
     <Container>
       {isLoading && <p>Loading...</p>}
-      <Row className="justify-content-around">
-        Houses - {totalElements} announcements
-      </Row>
-      <hr />
-      <Row className="justify-content-around">
-        <MostViewed />
-      </Row>
-      <hr />
-      <hr />
-      <Row className="justify-content-around">
-        <Reductions />
-      </Row>
+      <Row className="justify-content-around">Reductions</Row>
       <hr />
       <Row>
         {housesList.length !== 0 ? (
@@ -90,25 +78,8 @@ function ListHouses() {
           <h3>No houses documented</h3>
         )}
       </Row>
-      <hr />
-      <Row className="justify-content-around">
-        <div style={{ textAlign: "center" }}>
-          {!showButtonPrev ? (
-            <span></span>
-          ) : (
-            <Button onClick={() => prevPage()}>Prev..</Button>
-          )}
-          {currentPage}
-          {!showButtonNext ? (
-            <span></span>
-          ) : (
-            <Button onClick={() => nextPage()}>Next..</Button>
-          )}
-        </div>
-      </Row>
-      <Row className="justify-content-around">Out of {totalPages} pages</Row>
     </Container>
   );
 }
 
-export default ListHouses;
+export default Reductions;

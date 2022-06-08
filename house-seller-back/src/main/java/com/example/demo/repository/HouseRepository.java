@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HouseRepository extends PagingAndSortingRepository<House,String> {
-    Page<House> findByOrderByReductionDesc(Pageable pageable);
+    Page<House> findByReductionGreaterThanOrderByReductionDesc(int greater,Pageable pageable);
 }
