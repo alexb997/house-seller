@@ -21,7 +21,7 @@ function ListContainer(props) {
   return (
     <Card onClick={() => navigate(`/house/` + props.house.id)}>
       {props.house.reduction > 0 ? (
-        <ReductionEmblem reduction={props.house.reduced} />
+        <ReductionEmblem reduction={props.house.reduction} />
       ) : null}
       <Card.Img
         variant="top"
