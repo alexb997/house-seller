@@ -43,7 +43,9 @@ function ListContainer(props) {
                 <strong style={{ textDecorationLine: "line-through" }}>
                   {props.house.price}
                 </strong>
-                {reduced(props.house.price, props.house.reduction)}
+                <strong style={{ color: "red" }}>
+                  {reduced(props.house.price, props.house.reduction)}
+                </strong>
               </Row>
             ) : (
               <Row>Price: {props.house.price}</Row>

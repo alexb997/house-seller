@@ -5,46 +5,39 @@ import ListContainer from "./ListContainer";
 function MostViewed() {
   const [isLoading, setIsLoading] = useState(true);
   const [mostViewedHousesIDList, setMostViewedHousesIDList] = useState([]);
-  const [house1, setHouse1] = useState({});
+  const [mostViewdHouses, setMostViewedHouses] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
+    const fetchHouse = (id) => {
+      const response = fetch("http://localhost:8080/houses/" + id);
+      const data = response.json();
+      setMostViewedHouses((mostViewdHouses) => [...mostViewdHouses, data]);
+    };
     const fetchHouses = () => {
-      return fetch(
-        "http://localhost:8080/views/byHouses/topThree" 
-      )
+      return fetch("http://localhost:8080/views/byHouses/topThree")
         .then((response) => response.json())
         .then((data) => {
           setIsLoading(false);
           setMostViewedHousesIDList(data.items);
           setIsUpdating(false);
+          mostViewedHousesIDList.map((id) => fetchHouse(id));
         })
         .catch((err) => console.log(err));
     };
     fetchHouses();
   }, [isUpdating]);
 
-  const fetchHouse = (id) => {
-    return fetch("http://localhost:8080/houses/" + id)
-      .then((response) => response.json())
-      .then((data) => {
-        return data;
-      })
-      .catch((err) => console.log(err));
-  };
-
   return (
     <Container>
       {isLoading && <p>Loading...</p>}
-      <Row className="justify-content-around">
-        Most Viewed
-      </Row>
+      <Row className="justify-content-around">Most Viewed</Row>
       <hr />
       <Row>
-        {mostViewedHousesIDList.length !== 0 ? (
-          mostViewedHousesIDList.map((c, index) => (
+        {mostViewdHouses.length !== 0 ? (
+          mostViewdHouses.map((c, index) => (
             <Col md={4} key={index}>
-              <ListContainer house={fetchHouse(c)} />
+              <ListContainer house={c} />
             </Col>
           ))
         ) : (
