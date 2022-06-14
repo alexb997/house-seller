@@ -5,7 +5,7 @@ import "./house.css";
 function ReductionEmblem(props) {
   return (
     <Container className="emblem">
-      <Row className="justify-content-end">{props.reduction}%</Row>
+      <Row className="justify-content-center">{props.reduction}%</Row>
     </Container>
   );
 }

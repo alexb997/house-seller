@@ -2,23 +2,14 @@
 
   position: absolute;
   top:      0%;
-
-  border-radius: 2.2rem 1.9rem 2.3rem 2.0rem;
-
-  background-image: url("../../../public/Key5.svg");
+  background-image: url("../../../public/key.svg");
   background-repeat: no-repeat;
-  background-size: 50% 100%;
-  background-position: right;
-
+  background-size: 114% 90%;
+  padding-bottom: 5%;
   color:#f33f3f;
-
-  box-shadow: 0 -2px 4px rgba(  0,   0,   0, 0.2) inset,
-              0  3px 3px rgba(255, 255, 255, 0.6) inset,
-              0  1px 5px rgba(  0,   0,   0, 0.8);
-
   text-align: center;
   line-height: 4.2rem;
-  font-size:   2.2rem;
+  font-size:   3rem;
 
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
