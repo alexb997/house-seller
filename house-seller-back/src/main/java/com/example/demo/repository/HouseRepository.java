@@ -6,7 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface HouseRepository extends PagingAndSortingRepository<House,String> {
     Page<House> findByReductionGreaterThanOrderByReductionDesc(int greater,Pageable pageable);
+    Page<House> findByIdIn(List<String> ids, Pageable pageable);
 }

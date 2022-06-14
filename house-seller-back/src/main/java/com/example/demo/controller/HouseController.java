@@ -5,11 +5,13 @@ import com.example.demo.services.HouseService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -35,10 +37,11 @@ public class HouseController {
 
     @GetMapping("/all")
     public ResponseEntity<Response> all(@RequestParam(defaultValue = "0") int page,
-                                               @RequestParam(defaultValue = "5") int size){
+                                        @RequestParam(defaultValue = "5") int size,
+                                        @RequestParam(defaultValue = "id") String sortBy){
         try{
             List<House> houses;
-            Pageable paging = PageRequest.of(page, size);
+            Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
             Page<House> pageHouses;
             pageHouses = houseService.findAll(paging);
             houses = pageHouses.getContent();
@@ -51,10 +54,11 @@ public class HouseController {
 
     @GetMapping("/byReductions")
     public ResponseEntity<Response> allOrderedByReduction(@RequestParam(defaultValue = "0") int page,
-                                        @RequestParam(defaultValue = "5") int size){
+                                                          @RequestParam(defaultValue = "5") int size,
+                                                          @RequestParam(defaultValue = "id") String sortBy){
         try{
             List<House> houses;
-            Pageable paging = PageRequest.of(page, size);
+            Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
             Page<House> pageHouses;
             pageHouses = houseService.findAllReduced(paging);
             houses = pageHouses.getContent();
@@ -71,6 +75,21 @@ public class HouseController {
             return new ResponseEntity<>(houseService.getByID(id),HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/ids")
+    public ResponseEntity<?> byID(@RequestParam(required = false) List<String> ids, @PathVariable("id") String id){
+        try{
+            List<House> houses;
+            Pageable paging = PageRequest.of(0, 3);
+            Page<House> pageHouses;
+            pageHouses = houseService.findByIDIn(ids,paging);
+            houses = pageHouses.getContent();
+            Response response = new Response(houses,pageHouses.getTotalPages(),pageHouses.getTotalElements(),pageHouses.getNumber());
+            return new ResponseEntity<>(response,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("Houses not found",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

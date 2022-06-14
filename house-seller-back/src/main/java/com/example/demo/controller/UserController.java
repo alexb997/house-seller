@@ -5,6 +5,7 @@ import com.example.demo.services.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +24,11 @@ public class UserController {
 
     @GetMapping("/")
     public ResponseEntity<Response> getAllUsers(@RequestParam(defaultValue = "0") int page,
-                                                @RequestParam(defaultValue = "3") int size) {
+                                                @RequestParam(defaultValue = "3") int size,
+                                                @RequestParam(defaultValue = "id") String sortBy) {
         try{
             List<User> users;
-            Pageable paging = PageRequest.of(page, size);
+            Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
             Page<User> pageUsers;
             pageUsers = userService.allUsers(paging);
             users = pageUsers.getContent();

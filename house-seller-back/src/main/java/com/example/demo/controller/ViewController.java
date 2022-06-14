@@ -5,6 +5,7 @@ import com.example.demo.services.ViewService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +25,11 @@ public class ViewController {
 
     @GetMapping("/")
     public ResponseEntity<Response> getAllViews(@RequestParam(defaultValue = "0") int page,
-                                                @RequestParam(defaultValue = "3") int size) {
+                                                @RequestParam(defaultValue = "3") int size,
+                                                @RequestParam(defaultValue = "id") String sortBy) {
         try{
             List<View> views;
-            Pageable paging = PageRequest.of(page, size);
+            Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
             Page<View> pageViews;
             pageViews = viewService.allViews(paging);
             views = pageViews.getContent();
@@ -54,10 +56,11 @@ public class ViewController {
     @GetMapping("/byUser/{id}")
     public ResponseEntity<Response> getAllByUser(@PathVariable("id") String id ,
                                                  @RequestParam(defaultValue = "0") int page,
-                                                 @RequestParam(defaultValue = "3") int size) {
+                                                 @RequestParam(defaultValue = "3") int size,
+                                                 @RequestParam(defaultValue = "id") String sortBy) {
         try{
             List<View> views;
-            Pageable paging = PageRequest.of(page, size);
+            Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
             Page<View> pageViews;
             pageViews = viewService.allByUser(id,paging);
             views = pageViews.getContent();
@@ -70,11 +73,12 @@ public class ViewController {
 
     @GetMapping("/byHouse/{id}")
     public ResponseEntity<Response> getAllByHouse(@PathVariable("id") String id ,
-                                                 @RequestParam(defaultValue = "0") int page,
-                                                 @RequestParam(defaultValue = "3") int size) {
+                                                  @RequestParam(defaultValue = "0") int page,
+                                                  @RequestParam(defaultValue = "3") int size,
+                                                  @RequestParam(defaultValue = "id") String sortBy) {
         try{
             List<View> views;
-            Pageable paging = PageRequest.of(page, size);
+            Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
             Page<View> pageViews;
             pageViews = viewService.allByHouse(id,paging);
             views = pageViews.getContent();

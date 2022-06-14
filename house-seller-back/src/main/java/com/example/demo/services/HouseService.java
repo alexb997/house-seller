@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -18,6 +19,10 @@ public class HouseService {
 
     public Page<House> findAll(Pageable pageable){
         return houseRepository.findAll(pageable);
+    }
+
+    public Page<House> findByIDIn(List ids,Pageable pageable){
+        return houseRepository.findByIdIn(ids,pageable);
     }
 
     public Page<House> findAllReduced(Pageable pageable){
