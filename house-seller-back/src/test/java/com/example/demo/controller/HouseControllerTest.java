@@ -69,6 +69,25 @@ public class HouseControllerTest {
     }
 
     @Test
+    public void filterHouses() throws Exception {
+        House mockHouse2 = new House(122,"Fully-mobilated","300x600x900","Somewhere-else","Mr.Nobody",1200,10 ,"SomeDescription",new Characteristics());
+        House mockHouse3 = new House(123,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200, 10 ,"SomeDescription",new Characteristics());
+        List<House> mockHouseList= new ArrayList<>();
+        mockHouseList.add(mockHouse);
+        mockHouseList.add(mockHouse2);
+        mockHouseList.add(mockHouse3);
+        Page<House> mockPageHouses= new PageImpl<>(mockHouseList);
+
+        Mockito.when(houseService.findByFilters(Mockito.anyMap(),Mockito.any(Pageable.class))).thenReturn(mockPageHouses);
+        RequestBuilder requestBuilderGet = MockMvcRequestBuilders.get(
+                "/houses/filter").accept(
+                MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(requestBuilderGet).andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.items",hasSize(3)));
+    }
+
+    @Test
     public void allOrderedByReductionTest() throws Exception {
         House mockHouse2 = new House(122,"Fully-mobilated","300x600x900","Somewhere-else","Mr.Nobody",1200,11 ,"SomeDescription",new Characteristics());
         List<House> mockHouses= new ArrayList<>();

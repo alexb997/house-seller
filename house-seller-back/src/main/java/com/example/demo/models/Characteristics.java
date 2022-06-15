@@ -30,4 +30,21 @@ public class Characteristics {
         this.maxHeight = maxHeight;
         this.balconiesNumber = balconiesNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Characteristics{" +
+                "area='" + area + '\'' +
+                ", usableSurface=" + usableSurface +
+                ", builtSurface=" + builtSurface +
+                ", surface=" + surface +
+                ", bedroomsNumber=" + bedroomsNumber +
+                ", roomsNumber=" + roomsNumber +
+                ", bathroomsNumber=" + bathroomsNumber +
+                ", parkingSpots=" + parkingSpots +
+                ", constructionYear=" + constructionYear +
+                ", maxHeight='" + maxHeight + '\'' +
+                ", balconiesNumber=" + balconiesNumber +
+                '}';
+    }
 }

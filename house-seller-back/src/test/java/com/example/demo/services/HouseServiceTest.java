@@ -81,6 +81,32 @@ public class HouseServiceTest {
     }
 
     @Test
+    public void findByFiltersTest() {
+        List<House> mockHouseList= new ArrayList<>();
+        List<House> mockHouseList2= new ArrayList<>();
+        House mockHouse2 = new House(122,"Fully-mobilated","300x600x900","Somewhere-else","Mr.Nobody",1200,10,"SomeDescription",new Characteristics());
+        House mockHouse3 = new House(123,"Fully-mobilated","300x600x900","Somewhere","Ms.Nobody",1200, 10,"SomeDescription",new Characteristics());
+        House mockHouse4 = new House(125,"No furnishing","300x600x900","Somewhere","Mr.Nobody",1200, 10,"SomeDescription",new Characteristics());
+
+        mockHouseList.add(mockHouse);
+        mockHouseList.add(mockHouse2);
+        mockHouseList.add(mockHouse3);
+        mockHouseList.add(mockHouse4);
+
+        mockHouseList2.add(mockHouse2);
+        mockHouseList2.add(mockHouse3);
+
+        Map<String,String> mockFilters= new HashMap<>();
+
+        Page<House> mockPageHouses= new PageImpl<>(mockHouseList);
+        Mockito.when(houseRepository.findAllByStatusMatchesRegexAndDimensionsMatchesRegexAndAddressMatchesRegexAndOwnerMatchesRegex(Mockito.anyString(),Mockito.anyString(),Mockito.anyString(),Mockito.anyString(),Mockito.any(Pageable.class))).thenReturn(mockPageHouses);
+        Page<House> result = houseService.findByFilters(mockFilters,PageRequest.of(0,3));
+
+        assertThat(result.getTotalElements()).isEqualTo(mockPageHouses.getTotalElements());
+        System.out.println(result.getTotalElements());
+    }
+
+    @Test
     public void removeAllTest(){
         houseService.removeAllHouses();
         Mockito.verify(houseRepository).deleteAll();
