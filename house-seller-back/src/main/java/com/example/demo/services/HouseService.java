@@ -2,11 +2,13 @@ package com.example.demo.services;
 
 import com.example.demo.models.House;
 import com.example.demo.repository.HouseRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -27,6 +29,50 @@ public class HouseService {
 
     public Page<House> findAllReduced(Pageable pageable){
         return houseRepository.findByReductionGreaterThanOrderByReductionDesc(0,pageable);
+    }
+
+    public Page<House> findByFilters(Map<String,String> filters, Pageable pageable){
+        String status= StringUtils.EMPTY;
+        String dimensions=StringUtils.EMPTY;
+        String address=StringUtils.EMPTY;
+        String owner=StringUtils.EMPTY;
+        int price=0;
+        int number=0;
+        for (String filter : filters.keySet()) {
+            if(Objects.equals(filter, "status")){
+                status=filters.get(filter);
+            }
+            if(Objects.equals(filter, "dimensions")){
+                dimensions=filters.get(filter);
+            }
+            if(Objects.equals(filter, "address")){
+                address=filters.get(filter);
+            }
+            if(Objects.equals(filter, "owner")){
+                owner=filters.get(filter);
+            }
+            if(Objects.equals(filter, "price")){
+                price=Integer.parseInt(filters.get(filter));
+            }
+            if(Objects.equals(filter, "number")){
+                number=Integer.parseInt(filters.get(filter));
+            }
+        }
+        if(number!=0 && price!=0) {
+            return houseRepository.findAllByStatusMatchesRegexAndDimensionsMatchesRegexAndAddressMatchesRegexAndOwnerMatchesRegexAndNumberAndPrice
+                    (status,dimensions,address,owner,number,price,pageable);
+
+        }
+        if(price!=0){
+            return houseRepository.findAllByStatusMatchesRegexAndDimensionsMatchesRegexAndAddressMatchesRegexAndOwnerMatchesRegexAndPrice
+                    (status,dimensions,address,owner,price,pageable);
+        }
+        if(number!=0){
+            return houseRepository.findAllByStatusMatchesRegexAndDimensionsMatchesRegexAndAddressMatchesRegexAndOwnerMatchesRegexAndNumber
+                    (status,dimensions,address,owner,number,pageable);
+        }
+        return houseRepository.findAllByStatusMatchesRegexAndDimensionsMatchesRegexAndAddressMatchesRegexAndOwnerMatchesRegex
+                (status,dimensions,address,owner,pageable);
     }
 
     public House addHouse(House house) throws IllegalArgumentException{

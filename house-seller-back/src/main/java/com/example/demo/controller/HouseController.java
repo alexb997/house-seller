@@ -52,6 +52,24 @@ public class HouseController {
         }
     }
 
+    @GetMapping("/filter")
+    public ResponseEntity<Response> filterHouses(@RequestParam(required = false) Map<String,String> filterParams,
+                                               @RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "3") int size,
+                                               @RequestParam(defaultValue = "id") String sortBy){
+        try{
+            List<House> houses;
+            Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
+            Page<House> pageHouses;
+            pageHouses = houseService.findByFilters(filterParams,paging);
+            houses = pageHouses.getContent();
+            Response response = new Response(houses,pageHouses.getTotalPages(),pageHouses.getTotalElements(),pageHouses.getNumber());
+            return new ResponseEntity<>(response,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("Houses not found",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/byReductions")
     public ResponseEntity<Response> allOrderedByReduction(@RequestParam(defaultValue = "0") int page,
                                                           @RequestParam(defaultValue = "5") int size,
