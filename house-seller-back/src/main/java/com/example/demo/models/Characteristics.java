@@ -3,6 +3,7 @@ package com.example.demo.models;
 public class Characteristics {
 
     String area;
+    String typeOfSurface;
     Integer usableSurface;
     Integer builtSurface;
     Integer surface;
@@ -17,8 +18,9 @@ public class Characteristics {
     public Characteristics() {
     }
 
-    public Characteristics(String area, Integer usableSurface, Integer builtSurface, Integer surface, Integer bedroomsNumber, Integer roomsNumber, Integer bathroomsNumber, Integer parkingSpots, Integer constructionYear, String maxHeight, Integer balconiesNumber) {
+    public Characteristics(String area, String typeOfSurface, Integer usableSurface, Integer builtSurface, Integer surface, Integer bedroomsNumber, Integer roomsNumber, Integer bathroomsNumber, Integer parkingSpots, Integer constructionYear, String maxHeight, Integer balconiesNumber) {
         this.area = area;
+        this.typeOfSurface = typeOfSurface;
         this.usableSurface = usableSurface;
         this.builtSurface = builtSurface;
         this.surface = surface;
@@ -35,6 +37,7 @@ public class Characteristics {
     public String toString() {
         return "Characteristics{" +
                 "area='" + area + '\'' +
+                ", typeOfSurface='" + typeOfSurface + '\'' +
                 ", usableSurface=" + usableSurface +
                 ", builtSurface=" + builtSurface +
                 ", surface=" + surface +
