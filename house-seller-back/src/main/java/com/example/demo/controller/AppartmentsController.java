@@ -51,24 +51,6 @@ public class AppartmentsController {
         }
     }
 
-    @GetMapping("/filter")
-    public ResponseEntity<Response> filterAppartments(@RequestParam(required = false) Map<String,String> filterParams,
-                                                 @RequestParam(defaultValue = "0") int page,
-                                                 @RequestParam(defaultValue = "3") int size,
-                                                 @RequestParam(defaultValue = "id") String sortBy){
-        try{
-            List<Appartment> appartments;
-            Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
-            Page<Appartment> pageAppartments;
-            pageAppartments = appartmentsService.findByFilters(filterParams,paging);
-            appartments = pageAppartments.getContent();
-            Response response = new Response(appartments,pageAppartments.getTotalPages(),pageAppartments.getTotalElements(),pageAppartments.getNumber());
-            return new ResponseEntity<>(response,HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity("Appartments not found",HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     @GetMapping("/byReductions")
     public ResponseEntity<Response> allOrderedByReduction(@RequestParam(defaultValue = "0") int page,
                                                           @RequestParam(defaultValue = "5") int size,
