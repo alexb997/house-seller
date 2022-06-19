@@ -8,12 +8,14 @@ import Details from "../components/house/Details";
 import EditHouse from "../components/house/Edit";
 import ListHouses from "../components/house/List";
 import Register from "../components/user/Register";
+import Home from "../pages/Home";
 
 function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<ListHouses />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/list" element={<ListHouses />} />
         <Route path="/house/add" element={<AddHouse />} />
         <Route path="/house/:id" element={<Details />} />
         <Route path="/house/edit/:id" element={<EditHouse />} />

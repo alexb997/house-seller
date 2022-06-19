@@ -48,9 +48,11 @@ const AddAnnouncement = () => {
               handleSubmit(e);
             }}
           >
-            <Row>
-              <Col md={6}>
+            <Row className="justify-content-around">
+              <Col>
                 <label>Owner:</label>
+              </Col>
+              <Col>
                 <input
                   type="text"
                   name="owner"
@@ -59,10 +61,12 @@ const AddAnnouncement = () => {
                 />
               </Col>
             </Row>
-            <hr />
-            <Row>
-              <Col md={6}>
+            <hr className="hr-invisible" />
+            <Row className="justify-content-around">
+              <Col>
                 <label>Reduction:</label>
+              </Col>
+              <Col>
                 <input
                   type="number"
                   name="reduction"
@@ -70,8 +74,13 @@ const AddAnnouncement = () => {
                   onChange={(e) => setReduction(e.target.value)}
                 />
               </Col>
-              <Col md={6}>
+            </Row>
+            <hr className="hr-invisible" />
+            <Row className="justify-content-around">
+              <Col>
                 <label>Price:</label>
+              </Col>
+              <Col>
                 <input
                   type="number"
                   name="price"
@@ -80,10 +89,12 @@ const AddAnnouncement = () => {
                 />
               </Col>
             </Row>
-            <hr />
-            <Row>
+            <hr className="hr-invisible" />
+            <Row className="justify-content-around">
               <Col>
                 <label>Type:</label>
+              </Col>
+              <Col>
                 <input
                   type="text"
                   name="type"
@@ -92,6 +103,7 @@ const AddAnnouncement = () => {
                 />
               </Col>
             </Row>
+            <hr className="hr-invisible" />
             <Button variant="primary" type="submit">
               Proceed to next step -&gt;
               {/* this will proceed to 2nd component and make the initial component dissapear. !Render effects! */}

@@ -1,5 +1,4 @@
 .emblem{
-
   position: absolute;
   top:      0%;
   background-image: url("../../../public/key.svg");
@@ -10,6 +9,5 @@
   text-align: center;
   line-height: 4.2rem;
   font-size:   3rem;
-
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
