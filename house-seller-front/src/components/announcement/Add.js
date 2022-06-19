@@ -94,6 +94,7 @@ const AddAnnouncement = () => {
             </Row>
             <Button variant="primary" type="submit">
               Proceed to next step -&gt;
+              {/* this will proceed to 2nd component and make the initial component dissapear. !Render effects! */}
             </Button>
           </form>
         </Col>

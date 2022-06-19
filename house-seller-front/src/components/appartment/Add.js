@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
-const AddAppartment = () => {
+const AddAppartment = (props) => {
+  const [announcement, setAnnouncement] = useState({});
   const [appartment, setAppartment] = useState({});
   const [status, setStatus] = useState("");
   const [characteristics, setCharacteristics] = useState([]);
@@ -14,10 +15,13 @@ const AddAppartment = () => {
     setAppartment({
       status: status,
       address: address,
-      owner: owner,
-      price: price,
-      reduction: reduction,
       characteristics: characteristics,
+    });
+    setAnnouncement({
+      owner: props.announcement.owner,
+      price: props.announcement.price,
+      reduction: props.announcement.reduction,
+      announcedObject: appartment,
     });
   }, []);
 
