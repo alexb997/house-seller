@@ -28,16 +28,17 @@ public class User implements UserDetails {
     public User() {
         this.username = StringUtils.EMPTY;
         this.password = StringUtils.EMPTY;
+        this.email = StringUtils.EMPTY;
+        this.userRole = UserRole.USER;
     }
 
     public User(String username,
                    String email,
-                   String password,
-                   UserRole userRole) {
+                   String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.userRole = userRole;
+        this.userRole = UserRole.USER;
     }
 
     public String getId() {
